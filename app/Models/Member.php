@@ -5,11 +5,14 @@ namespace App\Models;
 use Dcat\Admin\Traits\HasDateTimeFormatter;
 
 use Illuminate\Database\Eloquent\Casts\Attribute;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Notifications\Notifiable;
+use Laravel\Sanctum\HasApiTokens;
 
 class Member extends Model
 {
-    use HasDateTimeFormatter;
+    use HasDateTimeFormatter, HasApiTokens, HasFactory, Notifiable;
 
     public const STATUS_OK = 1;
 
@@ -31,4 +34,8 @@ class Member extends Model
             set: fn($value) => $value ?: '',
         );
     }
+
+    protected $hidden = [
+        'password'
+    ];
 }

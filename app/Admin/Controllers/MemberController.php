@@ -55,7 +55,6 @@ class MemberController extends AdminController
             $show->field('id');
             $show->field('mobile');
             $show->field('nickname');
-            $show->field('password');
             $show->field('vip');
             $show->field('status')->using(\App\Models\Member::STATUS_MAP);
             $show->field('remark');
@@ -74,17 +73,21 @@ class MemberController extends AdminController
         return Form::make(new Member(), function (Form $form) {
             $form->disableDeleteButton();
             $form->display('id');
-            $form->text('mobile')->required()->rules(function (Form $form) {
+            $form->text('mobile')->required()->minLength(11)->maxLength(11)->rules(function (Form $form) {
                 if (!$form->model()->id) {
                     return 'unique:members,mobile';
                 }
-            }, ['unique' => '手机号重复'])->minLength(11)->maxLength(11);
+            }, ['unique' => '手机号重复']);
             $form->text('nickname')->default('')->maxLength(18);
-            $form->password('password')->required()->minLength(6)->default(123456)->help('默认密码123456');
+            if ($form->isCreating()) {
+                $form->password('password')->required()->minLength(6)->default(123456)->help('默认密码123456');
+            }
             $form->select('vip')->options(\App\Models\Member::VIP_MAP)->required()->default(0);
             $form->switch('status')->options(\App\Models\Member::STATUS_MAP)->default(1);
             $form->text('remark')->default('')->maxLength(100);
-
+            $form->saving(function (Form $form) {
+                $form->password = password_hash($form->password, PASSWORD_DEFAULT);
+            });
             $form->display('created_at');
             $form->display('updated_at');
         });
