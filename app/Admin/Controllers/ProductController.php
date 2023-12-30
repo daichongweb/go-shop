@@ -31,7 +31,7 @@ class ProductController extends AdminController
             $grid->column('status')->switch();
             $grid->column('created_at')->width(200)->sortable();
             $grid->column('updated_at')->width(200);
-
+            $grid->model()->orderBy('status', 'desc')->orderBy('created_at', 'desc');
             $grid->filter(function (Grid\Filter $filter) {
                 $filter->equal('id');
                 $filter->like('name');

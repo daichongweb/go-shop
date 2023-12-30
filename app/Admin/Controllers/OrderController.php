@@ -36,7 +36,7 @@ class OrderController extends AdminController
             $grid->column('status')->using(\App\Models\Order::STATUS_MAP)->label(\App\Models\Order::STATUS_COLOR);
             $grid->column('created_at')->width(200)->sortable();
             $grid->column('updated_at')->width(200);
-
+            $grid->model()->orderByRaw('case when status=0 then 1 when status=1 then 2 when status=-1 then 3 else 4 end')->orderBy('created_at', 'desc');
             $grid->filter(function (Grid\Filter $filter) {
                 $filter->equal('id');
                 $filter->where('payMobile', function ($query) {

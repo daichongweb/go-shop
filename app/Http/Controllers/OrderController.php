@@ -79,7 +79,7 @@ class OrderController extends Controller
             'product_id' => $productId,
             'pay_price' => $price,
             'num' => $num,
-            'status' => 0
+            'status' => 1
         ]);
         if (!$model->save()) {
             throw new ApiException('订单创建失败');
