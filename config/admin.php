@@ -11,7 +11,7 @@ return [
     | login page.
     |
     */
-    'name' => 'Down Hub',
+    'name' => 'Go Shop',
 
     /*
     |--------------------------------------------------------------------------
@@ -22,7 +22,7 @@ return [
     | `img` tag, eg '<img src="http://logo-url" alt="Admin logo">'.
     |
     */
-    'logo' => '<img src="" width="35">Down Hub',
+    'logo' => '<img src="" width="35">Go-Shop',
 
     /*
     |--------------------------------------------------------------------------
