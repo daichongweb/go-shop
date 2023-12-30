@@ -12,13 +12,13 @@ return new class extends Migration {
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            $table->integer('member_id')->nullable()->index()->comment('所属人id');
-            $table->integer('pay_member_id')->nullable()->index()->comment('购买人id');
-            $table->integer('reference_member_id')->nullable()->index()->comment('推荐人id');
-            $table->integer('product_id')->nullable()->index();
-            $table->integer('pay_price')->nullable()->default(1)->unsigned()->comment('单位分');
-            $table->integer('num')->nullable()->default(1)->unsigned();
-            $table->tinyInteger('status')->nullable()->default(0)->comment('0待支付，1完成，-1取消');
+            $table->integer('member_id')->nullable(false)->index()->comment('所属人id');
+            $table->integer('pay_member_id')->nullable(false)->index()->comment('购买人id');
+            $table->integer('reference_member_id')->nullable(false)->index()->comment('推荐人id');
+            $table->integer('product_id')->nullable(false)->index();
+            $table->integer('pay_price')->nullable(false)->default(1)->unsigned()->comment('单位分');
+            $table->integer('num')->nullablefalse()->default(1)->unsigned();
+            $table->tinyInteger('status')->nullable(false)->default(0)->comment('0待支付，1完成，-1取消');
             $table->timestamps();
         });
     }

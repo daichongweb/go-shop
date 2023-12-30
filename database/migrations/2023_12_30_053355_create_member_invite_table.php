@@ -12,8 +12,8 @@ return new class extends Migration {
     {
         Schema::create('member_invite', function (Blueprint $table) {
             $table->id();
-            $table->integer('member_id')->index()->nullable();
-            $table->integer('invite_member_id')->index()->nullable();
+            $table->integer('member_id')->index()->nullable(false);
+            $table->integer('invite_member_id')->index()->nullable(false);
             $table->timestamps();
         });
     }

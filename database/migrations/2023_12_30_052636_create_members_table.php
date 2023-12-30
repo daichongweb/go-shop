@@ -13,10 +13,11 @@ return new class extends Migration {
         Schema::create('members', function (Blueprint $table) {
             $table->id();
             $table->string('mobile', 11)->unique();
-            $table->string('nickname', 18)->default('')->nullable();
-            $table->string('password', 64)->nullable()->default('');
+            $table->string('nickname', 18)->default('')->nullable(false);
+            $table->string('password', 64)->nullable(false)->default('');
             $table->integer('vip')->nullable()->default(0)->unsigned();
-            $table->tinyInteger('status',)->default(0)->nullable();
+            $table->tinyInteger('status',)->default(0)->nullable(false);
+            $table->string('remark', 40)->default('')->nullable(false);
             $table->timestamps();
         });
     }
