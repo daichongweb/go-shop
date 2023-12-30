@@ -14,6 +14,8 @@
 
 > php artisan admin:install
 
+> php artisan migrate
+
 
 # 本地调试
 > php artisan serve
