@@ -3,6 +3,7 @@
 namespace App\Admin\Controllers;
 
 use App\Admin\Repositories\Order;
+use App\Admin\Repositories\Product;
 use Dcat\Admin\Admin;
 use Dcat\Admin\Form;
 use Dcat\Admin\Grid;
@@ -38,7 +39,21 @@ class OrderController extends AdminController
 
             $grid->filter(function (Grid\Filter $filter) {
                 $filter->equal('id');
+                $filter->where('payMobile', function ($query) {
+                    $query->whereHas('payMember', function ($query) {
+                        $query->where('mobile', 'like', "%{$this->input}%");
+                    });
+                }, '购买人');
 
+                $filter->where('referenceMobile', function ($query) {
+                    $query->whereHas('referenceMember', function ($query) {
+                        $query->where('mobile', 'like', "%{$this->input}%");
+                    });
+                }, '推荐人');
+
+                $filter->equal('productId', '商品')->select(array_column(\App\Models\Product::query()->select(['id', 'name'])->get()->toArray(), 'name', 'id'));
+
+                $filter->equal('status')->select(\App\Models\Order::STATUS_MAP);
             });
         });
     }

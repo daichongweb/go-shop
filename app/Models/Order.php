@@ -11,6 +11,16 @@ class Order extends Model
 {
     use HasDateTimeFormatter;
 
+    protected $fillable = [
+        'member_id',
+        'pay_member_id',
+        'reference_member_id',
+        'product_id',
+        'pay_price',
+        'num',
+        'status'
+    ];
+
     public const STATUS_WAIT = 0;
 
     public const STATUS_OK = 1;

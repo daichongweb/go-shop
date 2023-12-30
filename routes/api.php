@@ -26,6 +26,7 @@ Route::middleware('auth:sanctum')->group(function () {
     // 订单
     Route::prefix('order')->group(function () {
         Route::get('/index', [OrderController::class, 'index']);
+        Route::post('/create', [OrderController::class, 'create']);
     });
 
     // 商品
