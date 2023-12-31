@@ -27,7 +27,9 @@ class ProductController extends AdminController
             $grid->column('price')->display(function ($va) {
                 return '<font color="red">¥' . ($va / 100) . '</font>';
             });
-            $grid->column('description');
+            $grid->column('description')->display(function ($va) {
+                return $va ?: '无';
+            })->textarea();
             $grid->column('status')->switch();
             $grid->column('created_at')->width(200)->sortable();
             $grid->column('updated_at')->width(200);

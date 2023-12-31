@@ -24,7 +24,9 @@ class MemberController extends AdminController
             $grid->disableBatchDelete();
             $grid->column('id')->sortable();
             $grid->column('mobile');
-            $grid->column('nickname')->textarea();
+            $grid->column('nickname')->display(function ($va) {
+                return $va ?: '无';
+            })->textarea();
             $grid->column('vip')->label(Admin::color()->green());
             $grid->column('status')->switch();
             $grid->column('remark')->textarea();
