@@ -36,3 +36,4 @@ Route::middleware('auth:sanctum')->group(function () {
 });
 
 Route::post('/login', [LoginController::class, 'index']);
+Route::post('/reg', [LoginController::class, 'reg']);

@@ -14,6 +14,15 @@ class Member extends Model
 {
     use HasDateTimeFormatter, HasApiTokens, HasFactory, Notifiable;
 
+    protected $fillable = [
+        'mobile',
+        'nickname',
+        'password',
+        'vip',
+        'status',
+        'remark'
+    ];
+
     public const STATUS_OK = 1;
 
     public const STATUS_DISABLE = 0;

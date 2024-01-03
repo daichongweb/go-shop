@@ -32,4 +32,30 @@ class LoginController extends Controller
             'token' => $member->createToken($mobile)->plainTextToken,
         ]);
     }
+
+    /**
+     * @throws ApiException
+     */
+    public function reg(Request $request): JsonResponse
+    {
+        $mobile = $request->post('mobile');
+        $password = $request->post('password');
+        if (!$mobile || !$password) {
+            throw new ApiException('缺少参数');
+        }
+        $member = Member::query()->where('mobile', $mobile)->first();
+        if ($member) {
+            throw new ApiException('用户已注册');
+        }
+        $member = new Member([
+            'mobile' => $mobile,
+            'password' => password_hash($password, PASSWORD_DEFAULT),
+            'nickname' => $request->post('nickname', ''),
+            'vip' => 0
+        ]);
+        if (!$member->save()) {
+            throw new ApiException('注册失败');
+        }
+        return Rsp::success();
+    }
 }
