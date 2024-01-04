@@ -63,6 +63,7 @@ namespace Dcat\Admin {
      * @property Grid\Column|Collection expires_at
      * @property Grid\Column|Collection price
      * @property Grid\Column|Collection email_verified_at
+     * @property Grid\Column|Collection id_card
      *
      * @method Grid\Column|Collection id(string $label = null)
      * @method Grid\Column|Collection name(string $label = null)
@@ -116,6 +117,7 @@ namespace Dcat\Admin {
      * @method Grid\Column|Collection expires_at(string $label = null)
      * @method Grid\Column|Collection price(string $label = null)
      * @method Grid\Column|Collection email_verified_at(string $label = null)
+     * @method Grid\Column|Collection id_card(string $label = null)
      */
     class Grid {}
 
@@ -174,6 +176,7 @@ namespace Dcat\Admin {
      * @property Show\Field|Collection expires_at
      * @property Show\Field|Collection price
      * @property Show\Field|Collection email_verified_at
+     * @property Show\Field|Collection id_card
      *
      * @method Show\Field|Collection id(string $label = null)
      * @method Show\Field|Collection name(string $label = null)
@@ -227,6 +230,7 @@ namespace Dcat\Admin {
      * @method Show\Field|Collection expires_at(string $label = null)
      * @method Show\Field|Collection price(string $label = null)
      * @method Show\Field|Collection email_verified_at(string $label = null)
+     * @method Show\Field|Collection id_card(string $label = null)
      */
     class Show {}
 

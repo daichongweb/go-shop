@@ -14,6 +14,7 @@ Route::group([
 
     $router->get('/', 'HomeController@index');
     $router->resource('/members', 'MemberController');
+    $router->resource('/apply', 'VipApplyController');
     $router->resource('/products', 'ProductController');
     $router->resource('/orders', 'OrderController');
 });

@@ -34,7 +34,7 @@ class Order extends Model
     ];
 
     public const STATUS_COLOR = [
-        self::STATUS_WAIT => "gray",
+        self::STATUS_WAIT => "green",
         self::STATUS_OK => "success",
         self::STATUS_CACHE => "red",
     ];
