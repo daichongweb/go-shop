@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Dcat\Admin\Traits\HasDateTimeFormatter;
 
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Model;
 
 class VipApply extends Model
@@ -46,4 +47,12 @@ class VipApply extends Model
         self::TYPE_1 => '运营中心',
         self::TYPE_2 => '分销商',
     ];
+
+    protected function remark(): Attribute
+    {
+        return new Attribute(
+            get: fn($value) => $value,
+            set: fn($value) => $value ?: '',
+        );
+    }
 }

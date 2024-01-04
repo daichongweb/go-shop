@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ApplyController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
@@ -32,6 +33,11 @@ Route::middleware('auth:sanctum')->group(function () {
     // 商品
     Route::prefix('product')->group(function () {
         Route::get('/index', [ProductController::class, 'index']);
+    });
+
+    // Vip申请
+    Route::prefix('apply')->group(function () {
+        Route::post('/create', [ApplyController::class, 'create']);
     });
 });
 
