@@ -20,7 +20,8 @@ class Member extends Model
         'password',
         'vip',
         'status',
-        'remark'
+        'remark',
+        'channel_code'
     ];
 
     public const STATUS_OK = 1;

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Exceptions\ApiException;
 use App\Http\Response\Rsp;
+use App\Http\Services\MemberService;
 use App\Models\Member;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -51,7 +52,8 @@ class LoginController extends Controller
             'mobile' => $mobile,
             'password' => password_hash($password, PASSWORD_DEFAULT),
             'nickname' => $request->post('nickname', ''),
-            'vip' => 0
+            'vip' => 0,
+            'channel_code' => MemberService::genChannelCode()
         ]);
         if (!$member->save()) {
             throw new ApiException('注册失败');

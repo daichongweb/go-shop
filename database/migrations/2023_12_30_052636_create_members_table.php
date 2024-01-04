@@ -18,6 +18,7 @@ return new class extends Migration {
             $table->integer('vip')->nullable()->default(0)->unsigned();
             $table->tinyInteger('status',)->default(0)->nullable(false);
             $table->string('remark', 40)->default('')->nullable(false);
+            $table->bigInteger('channel_code')->nullable()->unsigned()->unique();
             $table->timestamps();
         });
     }

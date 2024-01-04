@@ -3,6 +3,7 @@
 namespace App\Admin\Controllers;
 
 use App\Admin\Repositories\Member;
+use App\Http\Services\MemberService;
 use Dcat\Admin\Admin;
 use Dcat\Admin\Form;
 use Dcat\Admin\Grid;
@@ -28,6 +29,7 @@ class MemberController extends AdminController
                 return $va ?: '无';
             })->textarea();
             $grid->column('vip')->label(Admin::color()->green());
+            $grid->column('channel_code', '会员码');
             $grid->column('status')->switch();
             $grid->column('remark')->textarea();
             $grid->column('created_at')->width(200)->sortable();
@@ -87,6 +89,7 @@ class MemberController extends AdminController
             $form->select('vip')->options(\App\Models\Member::VIP_MAP)->required()->default(0);
             $form->switch('status')->options(\App\Models\Member::STATUS_MAP)->default(1);
             $form->text('remark')->default('')->maxLength(100);
+            $form->hidden('channel_code')->default(MemberService::genChannelCode());
             $form->saving(function (Form $form) {
                 $form->password = password_hash($form->password, PASSWORD_DEFAULT);
             });
