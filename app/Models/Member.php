@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Http\Services\MemberService;
 use Dcat\Admin\Traits\HasDateTimeFormatter;
 
 use Illuminate\Database\Eloquent\Casts\Attribute;
@@ -48,4 +49,13 @@ class Member extends Model
     protected $hidden = [
         'password'
     ];
+
+    protected static function booted()
+    {
+        static::creating(function ($user) {
+            if (!$user->channel_code) {
+                $user->channel_code = MemberService::genChannelCode();
+            }
+        });
+    }
 }

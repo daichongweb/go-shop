@@ -49,6 +49,7 @@ namespace Dcat\Admin {
      * @property Grid\Column|Collection vip
      * @property Grid\Column|Collection status
      * @property Grid\Column|Collection remark
+     * @property Grid\Column|Collection channel_code
      * @property Grid\Column|Collection pay_member_id
      * @property Grid\Column|Collection reference_member_id
      * @property Grid\Column|Collection product_id
@@ -62,8 +63,10 @@ namespace Dcat\Admin {
      * @property Grid\Column|Collection last_used_at
      * @property Grid\Column|Collection expires_at
      * @property Grid\Column|Collection price
+     * @property Grid\Column|Collection code
      * @property Grid\Column|Collection email_verified_at
      * @property Grid\Column|Collection id_card
+     * @property Grid\Column|Collection reject_message
      *
      * @method Grid\Column|Collection id(string $label = null)
      * @method Grid\Column|Collection name(string $label = null)
@@ -103,6 +106,7 @@ namespace Dcat\Admin {
      * @method Grid\Column|Collection vip(string $label = null)
      * @method Grid\Column|Collection status(string $label = null)
      * @method Grid\Column|Collection remark(string $label = null)
+     * @method Grid\Column|Collection channel_code(string $label = null)
      * @method Grid\Column|Collection pay_member_id(string $label = null)
      * @method Grid\Column|Collection reference_member_id(string $label = null)
      * @method Grid\Column|Collection product_id(string $label = null)
@@ -116,8 +120,10 @@ namespace Dcat\Admin {
      * @method Grid\Column|Collection last_used_at(string $label = null)
      * @method Grid\Column|Collection expires_at(string $label = null)
      * @method Grid\Column|Collection price(string $label = null)
+     * @method Grid\Column|Collection code(string $label = null)
      * @method Grid\Column|Collection email_verified_at(string $label = null)
      * @method Grid\Column|Collection id_card(string $label = null)
+     * @method Grid\Column|Collection reject_message(string $label = null)
      */
     class Grid {}
 
@@ -162,6 +168,7 @@ namespace Dcat\Admin {
      * @property Show\Field|Collection vip
      * @property Show\Field|Collection status
      * @property Show\Field|Collection remark
+     * @property Show\Field|Collection channel_code
      * @property Show\Field|Collection pay_member_id
      * @property Show\Field|Collection reference_member_id
      * @property Show\Field|Collection product_id
@@ -175,8 +182,10 @@ namespace Dcat\Admin {
      * @property Show\Field|Collection last_used_at
      * @property Show\Field|Collection expires_at
      * @property Show\Field|Collection price
+     * @property Show\Field|Collection code
      * @property Show\Field|Collection email_verified_at
      * @property Show\Field|Collection id_card
+     * @property Show\Field|Collection reject_message
      *
      * @method Show\Field|Collection id(string $label = null)
      * @method Show\Field|Collection name(string $label = null)
@@ -216,6 +225,7 @@ namespace Dcat\Admin {
      * @method Show\Field|Collection vip(string $label = null)
      * @method Show\Field|Collection status(string $label = null)
      * @method Show\Field|Collection remark(string $label = null)
+     * @method Show\Field|Collection channel_code(string $label = null)
      * @method Show\Field|Collection pay_member_id(string $label = null)
      * @method Show\Field|Collection reference_member_id(string $label = null)
      * @method Show\Field|Collection product_id(string $label = null)
@@ -229,8 +239,10 @@ namespace Dcat\Admin {
      * @method Show\Field|Collection last_used_at(string $label = null)
      * @method Show\Field|Collection expires_at(string $label = null)
      * @method Show\Field|Collection price(string $label = null)
+     * @method Show\Field|Collection code(string $label = null)
      * @method Show\Field|Collection email_verified_at(string $label = null)
      * @method Show\Field|Collection id_card(string $label = null)
+     * @method Show\Field|Collection reject_message(string $label = null)
      */
     class Show {}
 

@@ -7,6 +7,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Response;
 use Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException;
+use Symfony\Component\HttpKernel\Exception\TooManyRequestsHttpException;
 use Throwable;
 
 class Handler extends ExceptionHandler
@@ -39,6 +40,9 @@ class Handler extends ExceptionHandler
     {
         if ($e instanceof MethodNotAllowedHttpException) {
             throw new ApiException($e->getMessage());
+        }
+        if ($e instanceof TooManyRequestsHttpException) {
+            throw new ApiException('请求过于频繁，请稍后重试');
         }
         return parent::render($request, $e);
     }

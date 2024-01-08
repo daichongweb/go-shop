@@ -3,9 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Exceptions\ApiException;
+use App\Http\Requests\SmsCodeRequest;
+use App\Http\Requests\SmsLoginRequest;
 use App\Http\Response\Rsp;
-use App\Http\Services\MemberService;
+use App\Http\Utils\StringUtil;
+use App\Jobs\BindChannelCodeJob;
 use App\Models\Member;
+use App\Models\SmsCode;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
@@ -52,12 +56,69 @@ class LoginController extends Controller
             'mobile' => $mobile,
             'password' => password_hash($password, PASSWORD_DEFAULT),
             'nickname' => $request->post('nickname', ''),
-            'vip' => 0,
-            'channel_code' => MemberService::genChannelCode()
+            'vip' => 0
         ]);
         if (!$member->save()) {
             throw new ApiException('注册失败');
         }
         return Rsp::success();
+    }
+
+    /**
+     * @throws ApiException
+     */
+    public function genSmsCode(SmsCodeRequest $request): JsonResponse
+    {
+        $request->validated();
+        $code = rand(100000, 999999);
+        $model = new SmsCode([
+            'mobile' => $request->post('mobile'),
+            'code' => $code,
+            'status' => 0
+        ]);
+        if (!$model->save()) {
+            throw new ApiException('验证码发送失败');
+        }
+        return Rsp::success([
+            'code' => $code,
+        ]);
+    }
+
+    /**
+     * @throws ApiException
+     */
+    public function smsLogin(SmsLoginRequest $request): JsonResponse
+    {
+        $request->validated();
+        $mobile = $request->post('mobile');
+        $smsCode = SmsCode::query()->where('mobile', $mobile)->where('code', $request->post('code'))->first();
+        if (!$smsCode) {
+            throw new ApiException('验证码无效');
+        }
+        if ($smsCode->status != SmsCode::STATUS_WAIT) {
+            throw new ApiException('验证码已失效');
+        }
+        $smsCode->status = SmsCode::STATUS_USED;
+        $smsCode->save();
+
+        $member = Member::query()->where('mobile', $mobile)->first();
+        if (!$member) {
+            $member = new Member([
+                'mobile' => $mobile,
+                'nickname' => StringUtil::generateRandomChineseNickname(),
+                'password' => password_hash(123456, PASSWORD_DEFAULT),
+                'vip' => 0,
+            ]);
+            if (!$member->save()) {
+                throw new ApiException('用户注册失败');
+            }
+        }
+        if (($channelCode = $request->post('channel_code')) && $channelCode > 0) {
+            BindChannelCodeJob::dispatch($member->id, $channelCode);
+        }
+        return Rsp::success([
+            'member' => $member,
+            'token' => $member->createToken($mobile)->plainTextToken,
+        ]);
     }
 }
